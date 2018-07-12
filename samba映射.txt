@@ -1,0 +1,31 @@
+目的: 就是将某个文件设置为根目录文件
+1.开启sabma
+service smb  start
+service nmb start
+2.修改apache配置文件
+	vim /usr/local/apache2/etc/httpd.conf
+	将所有子配置文件内容全部关闭
+	#LoadModule rewrite_module modules/mod_rewrite.so
+	#Include etc//extra/httpd-vhosts.conf
+	#Include etc//extra/httpd-autoindex.conf
+	将上面的三行代码前面加上#号
+	之后跳转到215行或216行左右
+
+	DocumentRoot "/usr/local/apache2//htdocs"
+	<Directory "/usr/local/apache2//htdocs">
+	将上面两段代码注释  并且复制一个内容且改为下面内容
+
+	DocumentRoot "/home/smb用户家目录"
+	<Directory "/home/smb用户家目录">
+	保存并退出
+3.重启apache 
+sto
+sta
+4.修改debao文件夹权限
+	chmod 777 debao
+
+
+如果你想要访问PHPmyadmin
+请在/usr/local/apache2/htdocs 目录下面使用
+ 
+ cp -r ./phpmyadmin  /home/smb用户家目录/phpmyadmin
